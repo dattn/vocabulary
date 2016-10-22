@@ -73,9 +73,20 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $level = Level::where([
+            'id'      => $id,
+            'user_id' => $request->user()->id
+        ])->first();
+
+        if ($level === null) {
+            return abort(404);
+        }
+
+        return view('levels/show', [
+            'level' => $level
+        ]);
     }
 
     /**
@@ -84,9 +95,20 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $level = Level::where([
+            'id'      => $id,
+            'user_id' => $request->user()->id
+        ])->first();
+
+        if ($level === null) {
+            return abort(404);
+        }
+
+        return view('levels/edit', [
+            'level' => $level
+        ]);
     }
 
     /**
@@ -98,7 +120,23 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'label' => 'required|max:255',
+        ]);
+
+        $level = Level::where([
+            'id'      => $id,
+            'user_id' => $request->user()->id
+        ])->first();
+
+        if ($level === null) {
+            return abort(404);
+        }
+
+        $level->label = $request->input('label');
+        $level->save();
+
+        return redirect()->route('levels.index');
     }
 
     /**

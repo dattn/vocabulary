@@ -5,20 +5,20 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Levels
-                <a class="btn btn-success btn-xs pull-right" href="{{ URL::route('levels.create') }}">
-                    Create
-                </a>
             </div>
 
             <div class="panel-body">
-                @if (count($levels) > 0)
-                    <table class="table table-striped task-table">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Label</th>
+                        <th>
+                            <a class="btn btn-success btn-xs" href="{{ URL::route('levels.create') }}">
+                                Create
+                            </a>
+                        </th>
+                    </thead>
 
-                        <thead>
-                            <th>Level</th>
-                            <th>&nbsp;</th>
-                        </thead>
-
+                    @if (count($levels) > 0)
                         <tbody>
                             @foreach ($levels as $level)
                                 <tr>
@@ -28,13 +28,18 @@
                                     </td>
 
                                     <td>
-                                        <!-- TODO: Delete Button -->
+                                        <a class="btn btn-warning btn-xs" href="{{ URL::route('levels.edit', [ $level->id ]) }}">
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-xs" href="{{ URL::route('levels.destroy', [ $level->id ]) }}">
+                                            Delete
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
-                @endif
+                    @endif
+                </table>
             </div>
         </div>
     </div>
