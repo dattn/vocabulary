@@ -10,8 +10,8 @@
             <div class="panel-body">
                 <table class="table table-striped">
                     <thead>
-                        <th>Label</th>
-                        <th>
+                        <th width="100%">Label</th>
+                        <th colspan="2">
                             <a class="btn btn-success btn-xs" href="{{ URL::route('levels.create') }}">
                                 Create
                             </a>
@@ -22,18 +22,23 @@
                         <tbody>
                             @foreach ($levels as $level)
                                 <tr>
-                                    <!-- Level label -->
                                     <td class="table-text">
                                         <div>{{ $level->label }}</div>
                                     </td>
-
                                     <td>
                                         <a class="btn btn-warning btn-xs" href="{{ URL::route('levels.edit', [ $level->id ]) }}">
                                             Edit
                                         </a>
-                                        <a class="btn btn-danger btn-xs" href="{{ URL::route('levels.destroy', [ $level->id ]) }}">
-                                            Delete
-                                        </a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ URL::route('levels.destroy', [ $level->id ]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button type="submit" class="btn btn-danger btn-xs">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

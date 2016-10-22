@@ -145,8 +145,19 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $level = Level::where([
+            'id'      => $id,
+            'user_id' => $request->user()->id
+        ])->first();
+
+        if ($level === null) {
+            return abort(404);
+        }
+
+        $level->delete();
+
+        return redirect()->route('levels.index');
     }
 }
