@@ -4,7 +4,10 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Groups In {{ $level->label }} 
+                Groups In {{ $level->label }}
+                <a class="btn btn-xs btn-default pull-right" href="{{ route('levels.index') }}">
+                    Back To Levels
+                </a>
             </div>
 
             <div class="panel-body">
