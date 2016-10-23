@@ -22,3 +22,5 @@ Route::get('home', 'HomeController@index');
 Route::resource('levels', 'LevelController');
 
 Route::resource('levels.groups', 'GroupController');
+
+Route::resource('levels.groups.translations', 'TranslationController');

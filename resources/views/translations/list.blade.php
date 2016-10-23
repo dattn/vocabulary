@@ -4,37 +4,41 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Groups In {{ $level->label }}
-                <a class="btn btn-xs btn-default pull-right" href="{{ route('levels.index') }}">
-                    Back To Levels
+                Translations In {{ $group->label }}
+                <a class="btn btn-xs btn-default pull-right" href="{{ route('levels.groups.index', [ $level ]) }}">
+                    Back To Groups
                 </a>
             </div>
 
             <div class="panel-body">
                 <table class="table table-striped">
                     <thead>
-                        <th width="100%">Label</th>
+                        <th>From</th>
+                        <th>To</th>
                         <th colspan="3">
-                            <a class="btn btn-success btn-xs" href="{{ route('levels.groups.create', [ $level ]) }}">
+                            <a class="btn btn-success btn-xs" href="{{ route('levels.groups.translations.create', [ $level, $group ]) }}">
                                 Create
                             </a>
                         </th>
                     </thead>
 
-                    @if (count($groups) > 0)
+                    @if (count($translations) > 0)
                         <tbody>
-                            @foreach ($groups as $group)
+                            @foreach ($translations as $translation)
                                 <tr>
                                     <td class="table-text">
-                                        <div>{{ $group->label }}</div>
+                                        <div>{{ $translation->from }}</div>
+                                    </td>
+                                    <td class="table-text">
+                                        <div>{{ $translation->to }}</div>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning btn-xs" href="{{ route('levels.groups.edit', [ $level, $group ]) }}">
+                                        <a class="btn btn-warning btn-xs" href="{{ route('levels.groups.translations.edit', [ $level, $group, $translation ]) }}">
                                             Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('levels.groups.destroy', [ $level, $group ]) }}" method="POST">
+                                        <form action="{{ route('levels.groups.translations.destroy', [ $level, $group, $translation ]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
@@ -42,11 +46,6 @@
                                                 Delete
                                             </button>
                                         </form>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-info btn-xs" href="{{ route('levels.groups.translations.index', [ $level, $group ]) }}">
-                                            Translations
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

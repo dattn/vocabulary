@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Level;
-
 use App\Group;
 
 class GroupController extends Controller
@@ -47,16 +44,16 @@ class GroupController extends Controller
 
     public function store(Request $request, Level $level)
     {
-        if ($level->user_id !== $request->user()->id) {
-            return abort(403);
-        }
-
         $this->validate($request, [
             'label' => 'required|max:255',
         ]);
 
+        if ($level->user_id !== $request->user()->id) {
+            return abort(403);
+        }
+
         $group = new Group;
-        $group->label    = $request->label;
+        $group->label    = $request->input('label');
         $group->level_id = $level->id;
         $group->save();
 

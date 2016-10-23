@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
-
 use App\Level;
 
 class LevelController extends Controller
@@ -39,7 +37,7 @@ class LevelController extends Controller
         ]);
 
         $level = new Level;
-        $level->label   = $request->label;
+        $level->label   = $request->input('label');
         $level->user_id = $request->user()->id;
         $level->save();
 
