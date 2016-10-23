@@ -65,11 +65,13 @@ class GroupController extends Controller
         ]);
     }
 
-    public function show(Request $request, Level $level, Group $group)
+    public function show(Request $request, Level $level, $group_id)
     {
         if ($level->user_id !== $request->user()->id) {
             return abort(403);
         }
+
+        $group = $level->groups()->findOrFail($group_id);
 
         return view('groups.show', [
             'level' => $level,
@@ -77,11 +79,13 @@ class GroupController extends Controller
         ]);
     }
 
-    public function edit(Request $request, Level $level, Group $group)
+    public function edit(Request $request, Level $level, $group_id)
     {
         if ($level->user_id !== $request->user()->id) {
             return abort(403);
         }
+
+        $group = $level->groups()->findOrFail($group_id);
 
         return view('groups.edit', [
             'level' => $level,
@@ -89,7 +93,7 @@ class GroupController extends Controller
         ]);
     }
 
-    public function update(Request $request, Level $level, Group $group)
+    public function update(Request $request, Level $level, $group_id)
     {
         $this->validate($request, [
             'label' => 'required|max:255',
@@ -99,6 +103,8 @@ class GroupController extends Controller
             return abort(403);
         }
 
+        $group = $level->groups()->findOrFail($group_id);
+
         $group->label = $request->input('label');
         $group->save();
 
@@ -107,11 +113,13 @@ class GroupController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, Level $level, Group $group)
+    public function destroy(Request $request, Level $level, $group_id)
     {
         if ($level->user_id !== $request->user()->id) {
             return abort(403);
         }
+
+        $group = $level->groups()->findOrFail($group_id);
 
         $group->delete();
 
