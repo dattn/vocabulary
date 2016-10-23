@@ -22,14 +22,14 @@ class LevelController extends Controller
             ->where('user_id', $request->user()->id)
             ->get();
 
-        return view('levels/list', [
+        return view('levels.list', [
             'levels' => $levels
         ]);
     }
 
     public function create()
     {
-        return view('levels/create');
+        return view('levels.create');
     }
 
     public function store(Request $request)
@@ -52,7 +52,7 @@ class LevelController extends Controller
             return abort(403);
         }
 
-        return view('levels/show', [
+        return view('levels.show', [
             'level' => $level
         ]);
     }
@@ -63,7 +63,7 @@ class LevelController extends Controller
             return abort(403);
         }
 
-        return view('levels/edit', [
+        return view('levels.edit', [
             'level' => $level
         ]);
     }

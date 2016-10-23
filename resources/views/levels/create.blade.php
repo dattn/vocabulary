@@ -10,7 +10,7 @@
             </div>
 
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="{{ URL::route('levels.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('levels.store') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="inputLabel" class="col-sm-2 control-label">

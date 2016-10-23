@@ -10,7 +10,7 @@
             </div>
 
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="{{ URL::route('levels.update', [ $level->id ]) }}">
+                <form class="form-horizontal" method="POST" action="{{ route('levels.update', [ $level ]) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="form-group">

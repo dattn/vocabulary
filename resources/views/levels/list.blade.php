@@ -12,7 +12,7 @@
                     <thead>
                         <th width="100%">Label</th>
                         <th colspan="2">
-                            <a class="btn btn-success btn-xs" href="{{ URL::route('levels.create') }}">
+                            <a class="btn btn-success btn-xs" href="{{ route('levels.create') }}">
                                 Create
                             </a>
                         </th>
@@ -26,12 +26,12 @@
                                         <div>{{ $level->label }}</div>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning btn-xs" href="{{ URL::route('levels.edit', [ $level->id ]) }}">
+                                        <a class="btn btn-warning btn-xs" href="{{ route('levels.edit', [ $level ]) }}">
                                             Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ URL::route('levels.destroy', [ $level->id ]) }}" method="POST">
+                                        <form action="{{ route('levels.destroy', [ $level ]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
