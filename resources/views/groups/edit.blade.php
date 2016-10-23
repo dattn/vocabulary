@@ -6,11 +6,11 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                Edit Level
+                Edit Group In {{ $level->label }}
             </div>
 
             <div class="panel-body">
-                <form class="form-horizontal" method="POST" action="{{ route('levels.update', [ $level ]) }}">
+                <form class="form-horizontal" method="POST" action="{{ route('levels.groups.update', [ $level, $group ]) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="form-group">
@@ -18,7 +18,7 @@
                             Label
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="label" class="form-control" id="inputLabel" placeholder="Label" value="{{ $level->label }}" autofocus>
+                            <input type="text" name="label" class="form-control" id="inputLabel" placeholder="Label" value="{{ $group->label }}" autofocus>
                         </div>
                     </div>
                     <div class="form-group">

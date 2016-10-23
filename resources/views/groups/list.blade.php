@@ -4,7 +4,7 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Levels
+                Groups In {{ $level->label }} 
             </div>
 
             <div class="panel-body">
@@ -12,26 +12,26 @@
                     <thead>
                         <th width="100%">Label</th>
                         <th colspan="2">
-                            <a class="btn btn-success btn-xs" href="{{ route('levels.create') }}">
+                            <a class="btn btn-success btn-xs" href="{{ route('levels.groups.create', [ $level ]) }}">
                                 Create
                             </a>
                         </th>
                     </thead>
 
-                    @if (count($levels) > 0)
+                    @if (count($groups) > 0)
                         <tbody>
-                            @foreach ($levels as $level)
+                            @foreach ($groups as $group)
                                 <tr>
                                     <td class="table-text">
-                                        <div>{{ $level->label }}</div>
+                                        <div>{{ $group->label }}</div>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning btn-xs" href="{{ route('levels.edit', [ $level ]) }}">
+                                        <a class="btn btn-warning btn-xs" href="{{ route('levels.groups.edit', [ $level, $group ]) }}">
                                             Edit
                                         </a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('levels.destroy', [ $level ]) }}" method="POST">
+                                        <form action="{{ route('levels.groups.destroy', [ $level, $group ]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
@@ -39,11 +39,6 @@
                                                 Delete
                                             </button>
                                         </form>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-info btn-xs" href="{{ route('levels.groups.index', [ $level ]) }}">
-                                            Groups
-                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

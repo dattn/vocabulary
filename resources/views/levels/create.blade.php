@@ -17,7 +17,7 @@
                             Label
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" name="label" class="form-control" id="inputLabel" placeholder="Label">
+                            <input type="text" name="label" class="form-control" id="inputLabel" placeholder="Label" autofocus>
                         </div>
                     </div>
                     <div class="form-group">
