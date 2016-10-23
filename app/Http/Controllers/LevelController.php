@@ -11,21 +11,11 @@ use App\Level;
 class LevelController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $levels = Level::orderBy('label', 'asc')
@@ -37,22 +27,11 @@ class LevelController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('levels/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -67,21 +46,10 @@ class LevelController extends Controller
         return redirect()->route('levels.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
+    public function show(Request $request, Level $level)
     {
-        $level = Level::where([
-            'id'      => $id,
-            'user_id' => $request->user()->id
-        ])->first();
-
-        if ($level === null) {
-            return abort(404);
+        if ($level->user_id !== $request->user()->id) {
+            return abort(403);
         }
 
         return view('levels/show', [
@@ -89,21 +57,10 @@ class LevelController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Level $level)
     {
-        $level = Level::where([
-            'id'      => $id,
-            'user_id' => $request->user()->id
-        ])->first();
-
-        if ($level === null) {
-            return abort(404);
+        if ($level->user_id !== $request->user()->id) {
+            return abort(403);
         }
 
         return view('levels/edit', [
@@ -111,26 +68,14 @@ class LevelController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Level $level)
     {
         $this->validate($request, [
             'label' => 'required|max:255',
         ]);
 
-        $level = Level::where([
-            'id'      => $id,
-            'user_id' => $request->user()->id
-        ])->first();
-
-        if ($level === null) {
-            return abort(404);
+        if ($level->user_id !== $request->user()->id) {
+            return abort(403);
         }
 
         $level->label = $request->input('label');
@@ -139,21 +84,10 @@ class LevelController extends Controller
         return redirect()->route('levels.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Level $level)
     {
-        $level = Level::where([
-            'id'      => $id,
-            'user_id' => $request->user()->id
-        ])->first();
-
-        if ($level === null) {
-            return abort(404);
+        if ($level->user_id !== $request->user()->id) {
+            return abort(403);
         }
 
         $level->delete();
